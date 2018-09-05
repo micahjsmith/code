@@ -13,7 +13,3 @@ def is_binary_file(path):
     '''
     with open(path, 'rb') as f:
         return is_binary_string(f.read(1024))
-
-def collect(iterable):
-    '''Collect the elements from an iterable into a list'''
-    return list(iterable)
