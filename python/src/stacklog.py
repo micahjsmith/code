@@ -14,10 +14,15 @@ class stacklog(object):
        with stacklog(logging.info, 'Running long function'):
            run_long_function()
 
-    This produces output:
+       with stacklog(logging.info, 'Running error-prone function'):
+           raise Exception
+
+    This produces logging output:
 
         INFO:root:Running long function...
         INFO:root:Running long function...DONE
+        INFO:root:Running error-prone function...
+        INFO:root:Running error-prone function...FAILURE
     """
 
     def __init__(self, method, message, *args, **kwargs):
@@ -38,10 +43,11 @@ class stacklog(object):
         self._log(suffix='FAILURE')
 
     def __call__(self, func):
+
         @wraps(func)
         def wrapper(*args, **kwargs):
             with self:
-                func(*args, **kwargs)
+                return func(*args, **kwargs)
 
         return wrapper
 
