@@ -2,5 +2,5 @@
 
 Miscellaneous useful code
 
-- Author: Micah Smith
+- Author: Micah Smith (MIT)
 - License: MIT License
